@@ -14,6 +14,7 @@ class Solution {
             }
             if(map.containsKey(sum)){
                 int idx = map.get(sum);
+                System.out.println(idx);
                 int len = i-idx;
                 if(len>ans){
                     ans = len;
