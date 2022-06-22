@@ -12,38 +12,26 @@ class Solution{
 public:
     //Function to partition the array around the range such 
     //that array is divided into three parts.
-    void threeWayPartition(vector<int>& arr,int lowVal, int highVal)
+    void threeWayPartition(vector<int>& arr,int a, int b)
     {
-        int n = arr.size();
-    int start = 0, end = n-1;
- 
-    // Traverse elements from left
-    for (int i=0; i<=end;)
-    {
-        // If current element is smaller than
-        // range, put it on next available smaller
-        // position.
-        if (arr[i] < lowVal)
-        {
-          //if i and start are same in that case we can't swap
-          //swap only if i is greater than start
-          if(i==start)
-          {
-            start++;
-            i++;
-          }
-          else
-            swap(arr[i++], arr[start++]);
+    int n=arr.size();
+    int low=0;
+    int mid=0;
+    int high=n-1;
+    while(high>=mid){
+        if(arr[mid]<a){
+            swap(arr[mid],arr[low]);
+            mid++;
+            low++;
+            
         }
- 
-        // If current element is greater than
-        // range, put it on next available greater
-        // position.
-        else if (arr[i] > highVal)
-            swap(arr[i], arr[end--]);
- 
-        else
-            i++;
+        else if(arr[mid]>b){
+            swap(arr[mid],arr[high--]);
+        
+        }
+        else{
+            mid++;
+        }
     }
 }
 };
