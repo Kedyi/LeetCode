@@ -16,16 +16,38 @@ class Solution{
     int majorityElement(int arr[], int size)
     {
         
-       unordered_map<int, int> m;
-        for(int i=0;i<size;i++)
-           m[arr[i]]++;
+    //   unordered_map<int, int> m;
+    //     for(int i=0;i<size;i++)
+    //       m[arr[i]]++;
          
-         for(auto i: m)
-             if(i.second > size/2)
-               return i.first;
+    //      for(auto i: m)
+    //          if(i.second > size/2)
+    //           return i.first;
          
-        return -1;
+    //     return -1;
         
+        
+        if(size==1){
+            return arr[0];
+        }
+        int count=1;
+        sort(arr,arr+size);
+        for(int i=1;i<size;i++){
+            if(arr[i-1]==arr[i]){
+                count++;
+            }
+           else{
+               if(count > size / 2){
+                 return arr[i-1];
+               }
+               count=1;
+
+        }
+        }
+        if(count>size/2){
+            return arr[size-1];
+        }
+     return -1;   
         
     }
 };
