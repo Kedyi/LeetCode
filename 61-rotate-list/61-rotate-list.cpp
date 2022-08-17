@@ -35,6 +35,7 @@ public:
         }
         ListNode* endptr=head;
         int l1=length(head,endptr);
+        
         while(l1<k){
             k=k-l1;
         }
