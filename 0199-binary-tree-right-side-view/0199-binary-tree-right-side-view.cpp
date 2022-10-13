@@ -16,7 +16,6 @@ public:
         if(root==NULL){
             return v;
         }
-        v.push_back(root->val);
         queue<TreeNode*> q;
         q.push(root);
         q.push(NULL);
@@ -24,7 +23,7 @@ public:
             TreeNode* node = q.front();
             q.pop();
             if(node!=NULL){
-                if(q.front()==NULL && node!=root){
+                if(q.front()==NULL){
                     v.push_back(node->val);
                 }
                 if(node->left){
