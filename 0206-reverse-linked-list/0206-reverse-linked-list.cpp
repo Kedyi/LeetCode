@@ -11,9 +11,10 @@
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        if(head==NULL){
+        if(head==NULL || head->next==NULL){
             return head;
         }
+        /* iterative
         ListNode* prev=NULL;
         ListNode* curr=head;
         ListNode* nextptr;
@@ -25,5 +26,17 @@ public:
         }
         head=prev;
         return head;
+        */
+        
+        /* recursive 
+         1->2->3->4
+        1->2<-3<-4(newhead)
+        1-><-2<-3<-4(newhead) now point head to null
+        NULL<-1<-2<-3<-4(newhead)
+        */
+        ListNode* newhead = reverseList(head->next);
+        head->next->next=head;
+        head->next=NULL;
+        return newhead;
     }
 };
