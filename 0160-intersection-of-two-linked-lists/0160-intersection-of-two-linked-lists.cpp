@@ -13,23 +13,22 @@ public:
             return 0;
         }
         int p=0;
+        //1 2 3 4 5
         while(head!=NULL){
-            p++;
             head=head->next;
+            p++;
         }
-        cout<<p<<endl;
         return p;
     }
-    
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        if(headA==headB){
-            return headA;
+        if(headA==NULL || headB==NULL){
+            return NULL;
         }
         int l1=len(headA);
         int l2=len(headB);
-        int d = 0;
-        ListNode* h1;
-        ListNode* h2;
+        int d=0;
+        ListNode* h1=headA;
+        ListNode* h2=headB;
         if(l1>l2){
             d=l1-l2;
             h1=headA;
@@ -39,23 +38,20 @@ public:
             d=l2-l1;
             h1=headB;
             h2=headA;
-    }
-        //h1 is the bigger linked list
+        }
         while(d){
             h1=h1->next;
             d--;
         }
-        int k=0;
-        if(h1==NULL){
-            return h1;
-        }
         if(h1==h2){
             return h1;
         }
-        while(h1->next!=h2->next){
-            k++;
+        while(h1!=NULL && h2!=NULL && h1->next != h2->next){
             h1=h1->next;
             h2=h2->next;
+        }
+        if(h1==NULL || h2==NULL){
+            return NULL;
         }
         return h1->next;
     }
