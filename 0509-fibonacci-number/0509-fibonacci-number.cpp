@@ -10,19 +10,23 @@ private:
     }
 public:
     int fib(int n) {
+        if(n==0) return 0;
         //here n is size
-        vector<int> dp(n+1,0); //declare same sise dp array
+        //vector<int> dp(n+1,0); //declare same sise dp array
+        //| | | |n | | 
+         int prev2 = 0;
+         int prev = 1;
     
         //loop ->changing para - index(0-2)
-        for(int i=0;i<n+1;i++){
-            
-            //base case
-            if(i <= 1) dp[i]=i;
+        for(int i=2;i<n+1;i++){
         
-            else dp[i] = dp[i-1]+dp[i-2];  
+            int curr = prev + prev2;  
+            
+            prev2=prev;
+            prev = curr;
         }
         
         //return sum
-        return dp[n];
+        return prev;
     }
 };
