@@ -10,33 +10,19 @@ private:
     }
 public:
     int fib(int n) {
-        if(n==0) return 0;
-        //here n is size
-        //vector<int> dp(n+1,0); //declare same sise dp array
-        //| | | |n | | 
-        int prev;
-        int prev2;
-        int curr;
-    
-        //loop ->changing para - index(0-2)
-        for(int i=0;i<n+1;i++){
-            
-            //base case
-            if(i==0) prev2=i;
-            else if(i==1) prev=i;
         
-            else{
-                
-            curr = prev + prev2; 
-            cout<<curr<<endl; 
-                
-            prev2=prev;
-            prev = curr;
-            }
+        if(n==0)  return 0;
+        
+        int prev2 = 0;
+        int prev = 1;
+        
+        for(int i=2;i<n+1;i++){
+            int curr= prev+prev2;
             
+            prev2=prev;
+            prev=curr;
         }
         
-        //return sum
         return prev;
     }
 };
