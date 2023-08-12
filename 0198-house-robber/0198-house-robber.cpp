@@ -1,33 +1,33 @@
 class Solution {
-    int fun(int ind, vector<int> &nums,vector<int> dp){
-        //base case
-        if(ind==0) return nums[0];
-        
-        if(dp[ind]!=-1)  return dp[ind];
-        
-        int nottake = 0+fun(ind-1,nums,dp);
-        int take = nums[ind];
-        if(ind>1) take += fun(ind-2,nums,dp);
-        
-       return dp[ind] = max(take,nottake);
-        
+    
+int fun(int ind,vector<int> &nums,vector<int> dp){
+    if(ind==0){
+        return nums[0];
     }
+    if(dp[ind]!=-1) return dp[ind];
+    
+    int decide_to_rob = nums[ind];
+    if(ind>1) decide_to_rob +=  fun(ind-2,nums,dp);
+    int decide_not_to_rob = 0 + fun(ind-1,nums,dp);
+    
+    return dp[ind] = max(decide_to_rob,decide_not_to_rob);
+}
 public:
     int rob(vector<int>& nums) {
-        int prev=nums[0];
-        int prev2=0;
-        //base case 0
+        vector<int> dp(nums.size(),0);
         
-        for(int ind=1;ind<nums.size();ind++){
-            int nottake = 0 + prev;
-            int take = nums[ind];
-            if(ind>1) take += prev2;
+        //base
+        dp[0]=nums[0];
         
-            int curr = max(take,nottake); 
-            
-            prev2=prev;
-            prev=curr;
+        //0->n-1
+        for(int ind = 1;ind<nums.size();ind++){
+            int decide_to_rob = nums[ind];
+            if(ind>1) decide_to_rob +=  dp[ind-2];
+            int decide_not_to_rob = 0 + dp[ind-1];
+
+            dp[ind] = max(decide_to_rob,decide_not_to_rob);
         }
-       return prev;
+        
+        return dp[nums.size()-1];
     }
 };
