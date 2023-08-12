@@ -30,30 +30,32 @@ private:
 public:
     int maxProfit(vector<int>& prices) {
         vector<vector<int>> dp(prices.size()+1,vector<int>(2,0));
-        
+        vector<int> ahead(2,0);
+        vector<int> curr(2,0);
         //changing parameters : buy,ind
         for(int ind = prices.size()-1;ind>=0;ind--){
             for(int buy = 0;buy<2;buy++){
                 int profit = 0;
                 if(buy){
 
-                    int profit_when_take = -prices[ind] + dp[ind+1][0];
-                    int profit_when_not_take = 0 + dp[ind+1][1]; 
+                    int profit_when_take = -prices[ind] + ahead[0];
+                    int profit_when_not_take = 0 + ahead[1]; 
 
                     profit = max(profit_when_take,profit_when_not_take);
                 }
                 else{
                     //sell
-                    int profit_when_sell = prices[ind] + dp[ind+1][1];
-                    int profit_when_not_sell = 0 + dp[ind+1][0];
+                    int profit_when_sell = prices[ind] + ahead[1];
+                    int profit_when_not_sell = 0 + ahead[0];
 
                     profit = max(profit_when_sell,profit_when_not_sell);
                 }
 
-                dp[ind][buy] = profit; 
+                curr[buy] = profit; 
+                ahead = curr;
             }
         }
         
-        return dp[0][1]; //1 means we are allowed to buy
+        return ahead[1]; 
     }
 };
