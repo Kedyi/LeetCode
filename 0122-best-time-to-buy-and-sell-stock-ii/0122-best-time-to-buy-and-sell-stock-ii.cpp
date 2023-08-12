@@ -33,7 +33,7 @@ public:
         
         //changing parameters : buy,ind
         for(int ind = prices.size()-1;ind>=0;ind--){
-            for(int buy = 1;buy>=0;buy--){
+            for(int buy = 0;buy<2;buy++){
                 int profit = 0;
                 if(buy){
 
