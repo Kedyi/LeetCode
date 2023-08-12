@@ -3,7 +3,7 @@ int f(int n,vector<int> &dp){
     if(n<=1) return n;
         
         if(dp[n]!=-1) return dp[n];
-        return dp[n]=fib(n-1)+fib(n-2);
+        return dp[n]=f(n-1,dp)+f(n-2,dp);
 }
 public:
     int fib(int n) {
