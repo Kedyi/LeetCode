@@ -8,16 +8,23 @@ int f(int n,vector<int> &dp){
 public:
     int fib(int n) {
         vector<int> dp(n+1,0);
-        
+        int curr;
+        int prev;
+        int prev2;
         for(int i=0;i<=n;i++){
-            if(i<=1){
-                dp[i] = i; 
+            
+            if(i==0){
+               prev2 = 0; 
             }
+            else if(i==1) prev = 1;
+            
             else{
-            dp[i]=dp[i-1]+dp[i-2];
-            }
+               curr=prev+prev2;
+                prev2=prev;
+                prev =curr;
+            } 
             
         }
-        return dp[n];
+        return prev;
     }
 };
