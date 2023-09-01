@@ -1,18 +1,19 @@
 class Solution {
-    
-void fun(int ind, vector<int> &ans){
-        int k=ind;
-        while(k){
-           ans[ind]+=(k%2);
-            k=k/2;
-        }
-}
+
     
 public:
     vector<int> countBits(int n) {
         vector<int> ans(n+1,0);
+        if(n==0){
+            return ans;
+        }
         for(int i=0;i<=n;i++){
-            fun(i,ans);
+            if(i%2==0){
+                ans[i]=ans[i/2];
+            }
+            else{
+                ans[i]=ans[i-1]+1;
+            }
         }
         
         return ans;
