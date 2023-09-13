@@ -6,7 +6,7 @@ int fun(int ind, int prev,vector<int> &nums,vector<vector<int>> &dp){
     }
     if(dp[ind][prev+1]!=-1) return dp[ind][prev+1];
     int take = INT_MIN;
-
+  //in dp prev+1, in nums prev
     if(prev==-1 || nums[ind]>nums[prev])  
         take = 1 + fun(ind+1,ind,nums,dp);
     
