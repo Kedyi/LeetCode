@@ -1,34 +1,33 @@
 class Solution {
     
-
+private:
+    int fun(int row, int col, vector<vector<int>> &grid,vector<vector<int>> &dp){
+        
+        //base
+        if(row==0 && col==0) return grid[0][0];
+        
+        //memoization
+        if(dp[row][col]!=-1) return dp[row][col];
+        
+        //came from up
+        int up = INT_MAX;
+        if(row>0) 
+            up = grid[row][col] + fun(row-1,col,grid,dp);
+        //came from left
+        int left = INT_MAX;
+        if(col>0)
+            left = grid[row][col] + fun(row,col-1,grid,dp);
+        
+        return dp[row][col] = min(up,left);
+    }
+    
 public:
     int minPathSum(vector<vector<int>>& grid) {
         int n = grid.size();
         int m = grid[0].size();
         
-        vector<vector<int>> dp(n,vector<int>(m,0));
-        vector<int> prev(n,0);
-        vector<int> curr(m,0);
+        vector<vector<int>> dp(n,vector<int>(m,-1));
         
-        for(int row=0;row<n;row++){
-            for(int col=0;col<m;col++){
-                if(row==0 && col==0){
-                    curr[col]=grid[row][col];
-                    prev[col]=grid[row][col];
-                }
-                else{
-                    int top = INT_MAX;
-                    int left = INT_MAX;
-                    if(row>0) top = prev[col] + grid[row][col];
-                    if(col>0) left = curr[col-1] + grid[row][col];
-
-                    curr[col]=min(top,left);
-                    
-                    prev=curr;
-                }
-            }
-        }
-        
-        return prev[m-1];
+        return fun(n-1,m-1,grid,dp);
     }
 };
