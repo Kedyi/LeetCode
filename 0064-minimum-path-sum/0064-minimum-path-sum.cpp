@@ -26,8 +26,37 @@ public:
         int n = grid.size();
         int m = grid[0].size();
         
-        vector<vector<int>> dp(n,vector<int>(m,-1));
+        vector<vector<int>> dp(n,vector<int>(m,0));
         
-        return fun(n-1,m-1,grid,dp);
+        // //base case: start point
+        // dp[0][0] = grid[0][0];
+        
+        //0->n/m
+    
+        for(int row=0; row<n ; row++){
+            
+            for(int col=0; col<m; col++){
+                
+                //base case
+                if(row==0 && col==0) dp[row][col] = grid[0][0];
+                
+                //came from up
+                else{
+                    int up = INT_MAX;
+                    if(row>0) 
+                        up = grid[row][col] + dp[row-1][col];
+
+                    //came from left
+                    int left = INT_MAX;
+                    if(col>0)
+                        left = grid[row][col] + dp[row][col-1];
+
+                    dp[row][col] = min(up,left);
+                }
+                
+            }
+        }
+        
+        return dp[n-1][m-1];
     }
 };
