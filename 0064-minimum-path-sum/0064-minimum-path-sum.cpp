@@ -12,25 +12,29 @@ public:
         //dp size given so no 0;
         vector<vector<int>> dp(n, vector<int>(m,0));
         
+        vector<int> prev(m,0);
+        vector<int> curr(m,0);
+        
         //base, first->last,copy paste
         for(int row=0;row<n;row++){
             for(int col=0;col<m;col++){
                 
-                if(row==0 && col==0) dp[row][col]=grid[0][0];
+                if(row==0 && col==0) curr[col]=grid[0][0];
                 
                 else{
                     int up=INT_MAX;
-                    if(row>0) up = grid[row][col]+dp[row-1][col];
+                    if(row>0) up = grid[row][col]+prev[col];
                     
                     int left = INT_MAX;
-                    if(col>0) left= grid[row][col] + dp[row][col-1];
+                    if(col>0) left= grid[row][col] + curr[col-1];
                     
                     
-                    dp[row][col] = min(up,left);
+                    curr[col] = min(up,left);
                 }
+                prev = curr;
             }
         }
         
-        return dp[n-1][m-1];
+        return prev[m-1];
     }
 };
