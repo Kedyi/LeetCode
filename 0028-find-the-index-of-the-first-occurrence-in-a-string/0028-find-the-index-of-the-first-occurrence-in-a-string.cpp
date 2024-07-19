@@ -1,29 +1,29 @@
 class Solution {
-    
-private:
-    string check(string haystack, int ind, string needle){
-        string ans;
-        int n = needle.size();
-        //cout<<ind<<" "<<n<<" ";
-        for(int i=ind;i<ind+n;i++){
-            ans+=haystack[i];
-        }
-        
-        //cout<<ans<<endl;
-        return ans;
-    }
 public:
     int strStr(string haystack, string needle) {
-        int n = needle.size();
-        if(needle==haystack){
-           return 0; 
-        }
-        if(n>haystack.size()) return -1;
-        for(int i=0;i<=haystack.size()-n;i++){
-            string ans = check(haystack, i, needle);
-            if(ans==needle) return i;
+        
+        int ans=-1;
+        
+        for(int i=0;i<haystack.size();i++){
+            int cnt=0;
+            if(haystack[i]==needle[0]){
+                for(int j=0;j<needle.size();j++){
+                  if(haystack[i+j]==needle[j]){
+                      cnt++;
+                  }else{
+                      break;
+                  }
+            }
+          }
+            if(cnt==needle.size()){
+                    ans=i;
+                break;
+                }
+                else{
+                    cnt=0;
+                }
         }
         
-        return -1;
+        return ans;
     }
 };
