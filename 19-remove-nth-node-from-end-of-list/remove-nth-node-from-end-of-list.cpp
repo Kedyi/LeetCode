@@ -14,7 +14,7 @@ public:
         ListNode* fast=head;
         ListNode* slow=head;
 
-        while(fast && n){
+        while( n){
             fast=fast->next;
             n--;
         }
@@ -30,7 +30,7 @@ public:
         ListNode* delNode = slow->next;
         slow->next=slow->next->next;
         delete delNode;
-        
+
         return head;
         
     }
