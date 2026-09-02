@@ -1,38 +1,38 @@
 class Solution {
-    int fun(int ind, int amount, vector<int>& coins, vector<vector<int>>& dp){
-        if(amount==0){
-            return 0;
-        }
 
-        if(ind>=coins.size()){
-            return INT_MAX;
-        }
+int fun(int ind, int amt, vector<int>& coins, vector<vector<int>>& dp){
 
-        if(dp[ind][amount]!=-1) return dp[ind][amount];
-
-        //not take
-        int nottake = fun(ind+1, amount, coins,dp);
-
-        //take
-        int take = INT_MAX;
-        if(amount>=coins[ind])
-        {
-        if(fun(ind, amount-coins[ind], coins, dp)==INT_MAX) 
-            take = INT_MAX;
-        else take = 1+ fun(ind, amount-coins[ind], coins,dp);
-        }
-        return dp[ind][amount] = min(take, nottake);
+    if(amt==0){
+        return 0;
     }
+
+    if(ind<0){
+        return INT_MAX;
+    }
+
+    if(dp[ind][amt]!=-1) return dp[ind][amt];
+
+    //take
+    int take = INT_MAX;
+    if(amt>=coins[ind]){
+    if(fun(ind, amt-coins[ind], coins, dp)!=INT_MAX)
+        take = 1+ fun(ind, amt-coins[ind], coins, dp);
+    }
+    //nottake
+    int nottake = 0 + fun(ind-1, amt, coins, dp);
+
+    return dp[ind][amt] = min(take,nottake);
+}
+
+
 public:
     int coinChange(vector<int>& coins, int amount) {
         int n = coins.size();
 
-        vector<vector<int>> dp(n+1,vector<int>(amount+1, -1));
-        int ans = fun(0, amount, coins, dp);
-        if(ans>=INT_MAX){
-            return -1;
-        }
-        
-        return ans;
+        vector<vector<int>> dp(n+1, vector<int>(amount+1, -1));
+
+        int ans = fun(n-1, amount, coins, dp);
+
+        return ans==INT_MAX?-1:ans;
     }
 };
