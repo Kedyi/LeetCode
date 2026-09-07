@@ -9,10 +9,6 @@ private:
         vis[u] = 1;
 
         for(int neighbour: adj[u]){
-            if(neighbour==parent){
-                continue;
-            }
-
             if(!vis[neighbour] && dfs(neighbour, v, u, vis, adj)){
                 return true;
             }
