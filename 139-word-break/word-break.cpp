@@ -31,11 +31,12 @@ public:
 
         //base
         dp[n]=true;
-        
+
         for(int ind=n;ind>=0;ind--){
             //Try all chances of word starting ind
             for(int i=ind;i<s.size();i++){
-
+                
+                //This lineO(n*n*L), extra L in TC
                 string w = s.substr(ind,i-ind+1);
 
                 if(word.count(w)){
