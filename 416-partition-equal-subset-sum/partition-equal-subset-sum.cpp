@@ -27,9 +27,31 @@ public:
 
         if(sum%2!=0) return false;
 
-        vector<vector<int>> dp(nums.size(), vector<int>(sum/2+1, -1));
+        vector<vector<int>> dp(nums.size(), vector<int>(sum/2+1, 0));
 
-        return fun(nums.size()-1,sum/2, nums, dp);
+        for(int ind=0;ind<nums.size();ind++){
+            dp[ind][0]=true;
+        }
+
+        //input the first layer
+        if(nums[0]<=sum/2){
+            dp[0][nums[0]]=true;
+        }
+
+        for(int ind=1;ind<nums.size();ind++){
+            for(int amt=1;amt<=sum/2;amt++){
+                
+                bool take = false;
+                if(nums[ind]<=amt)
+                take = dp[ind-1][amt-nums[ind]];
+
+                bool nottake = dp[ind-1][amt];
+
+                dp[ind][amt] = take || nottake;
+            }
+        }
+
+        return dp[nums.size()-1][sum/2];
 
     }
 };
